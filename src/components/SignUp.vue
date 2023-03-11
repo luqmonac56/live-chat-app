@@ -14,11 +14,15 @@ import { ref } from 'vue'
 import useSignup from '../composables/useSignup'
 export default {
     setup () {
+
+        const { error, signup } = useSignup()
+
         const displayName = ref('')
         const email = ref('')
         const password = ref('')
 
-        const handleSubmit = () =>{
+        const handleSubmit = async  () =>{
+            await signup(displayName.value, email.value, password.value)
             console.log(displayName.value, email.value, password.value);
         }
 
@@ -27,6 +31,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>
