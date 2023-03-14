@@ -1,8 +1,8 @@
 <template >
-    <nav class="flex justify-between items-center p-5">
+    <nav v-if="user" class="flex justify-between items-center p-5">
         <div class="">
-            <p class=" text-[#444]  text-[16px]">Hey there ..... display name </p>
-            <p class="text-[12px] text-[#999999]">Currently logged in as... email</p>
+            <p class=" text-[#444]  text-[16px]">Hey there {{ user.displayName }} </p>
+            <p class="text-[12px] text-[#999999]">Currently logged in as {{ user.email }}</p>
         </div>
         <button @click="handleLogout">Logout</button>
 
@@ -11,13 +11,13 @@
 
 <script >
 import useLogout from '../composables/useLogout';
+import getUser from '../composables/getUser'
 
 export default {
 
-
     setup(props) {
         const {  error, logout } = useLogout()
-
+        const { user } = getUser()
 
         const handleLogout = async()=>{
             await logout()
@@ -28,7 +28,7 @@ export default {
             }
         }
 
-        return{handleLogout}
+        return{handleLogout, user}
     }
 }
 
