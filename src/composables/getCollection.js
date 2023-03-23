@@ -5,11 +5,13 @@ const getCollection = (collection) =>{
 
     const documents = ref(null)
     const error = ref(null)
+    // const identity = ref('')
 
     let collectionRef = projectFirestore.collection(collection)
-    // .orderBy('createdAt')
+        // .orderBy('createdAt')
 
     collectionRef.onSnapshot( snap =>{
+        console.log('snapshot')
         let results = []
         documents.value = []
         snap.docs.forEach(doc => {
@@ -18,6 +20,7 @@ const getCollection = (collection) =>{
         });
         documents.value = results
         console.log(documents.value);
+        console.log(documents.value.createdAt);
         // console.log(results);
         error.value = null
     }, (err)=>{
@@ -27,6 +30,7 @@ const getCollection = (collection) =>{
     })
 
     console.log('seen');
+    // console.log(createdAt);
     console.log(documents.value);
     return { documents, error  }
 }

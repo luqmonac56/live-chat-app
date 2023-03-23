@@ -31,11 +31,6 @@ export default {
             if (!error.value) {
                 message.value = ''
             }
-
-            // message.value = ""
-            console.log(chat);
-            
-
         }
 
         return { message, handleSendMessage }
